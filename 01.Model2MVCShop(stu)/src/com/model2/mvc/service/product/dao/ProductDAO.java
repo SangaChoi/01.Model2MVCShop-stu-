@@ -38,7 +38,7 @@ public class ProductDAO {
 		Connection con = DBUtil.getConnection();
 		
 		String sql= 
-				"SELECT p.PROD_NO, p.prod_name, p.prod_detail, p.MANUFACTURE_DAY, p.PRICE, p.IMAGE_FILE, p.REG_DATE, t.tran_status_code"
+				"SELECT p.PROD_NO, p.prod_name, p.prod_detail, p.MANUFACTURE_DAY, p.PRICE, p.IMAGE_FILE, t.order_DATE, t.tran_status_code"
 				+" FROM product p, transaction t ";
 		if(searchVO.getSearchCondition() !=null) {
 			if(searchVO.getSearchCondition().equals("0")) {
@@ -83,7 +83,7 @@ public class ProductDAO {
 				vo.setPrice(rs.getInt("PRICE"));
 				vo.setFileName(rs.getString("IMAGE_FILE"));
 				vo.setRegDate(rs.getDate("REG_DATE"));
-				//vo.setProTranCode(rs.getString("tran_status_code"));
+				vo.setProTranCode(rs.getString("tran_status_code"));
 				
 				list.add(vo);
 				if (!rs.next())

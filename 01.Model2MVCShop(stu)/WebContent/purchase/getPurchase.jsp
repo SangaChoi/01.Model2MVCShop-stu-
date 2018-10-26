@@ -75,7 +75,6 @@
 		<td class="ct_write01">
 
 		<%
-		System.out.println("jsp 페이먼트 옵션 : "+purchase.getPaymentOption());
 		
 		if(purchase.getPaymentOption().equals("1")){ %>
 		현금구매

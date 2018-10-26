@@ -184,8 +184,9 @@ function fncGetProductList(){
 		<td align="left"><%=vo.getRegDate() %></td>
 		<td></td>
 		<td align="left">
-		
-		<%=vo.getProTranCode() %>
+		<%if(vo.getProTranCode().equals("1  ")){%>
+		구매완료
+		<%} %>
 		</td>	
 	</tr>
 	<tr>
