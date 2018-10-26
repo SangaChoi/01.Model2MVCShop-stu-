@@ -42,7 +42,7 @@ public class AddPurchaseAction extends Action{
 		purchase.setPurchaseProd(product);
 		purchase.setReceiverName(user.getUserName());
 		purchase.setReceiverPhone(user.getPhone());
-		purchase.setTranCode("");
+		purchase.setTranCode("1");
 		
 		PurchaseService purchaseService=new PurchaseServiceImpl();
 		purchaseService.addPurchase(purchase);

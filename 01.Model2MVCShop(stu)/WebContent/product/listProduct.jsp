@@ -185,8 +185,7 @@ function fncGetProductList(){
 		<td></td>
 		<td align="left">
 		
-			πËº€¡ﬂ
-		
+		<%=vo.getProTranCode() %>
 		</td>	
 	</tr>
 	<tr>
