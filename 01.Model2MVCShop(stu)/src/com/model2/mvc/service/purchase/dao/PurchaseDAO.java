@@ -89,6 +89,7 @@ public class PurchaseDAO {
 			purchase.setReceiverPhone(rs.getString("receiver_phone"));
 			purchase.setPurchaseProd(product);
 			purchase.setTranNo(rs.getInt("TRAN_NO"));
+			purchase.setTranCode(rs.getString("tran_status_code"));
 			
 			list.add(purchase);
 			if (!rs.next())
@@ -169,6 +170,20 @@ public class PurchaseDAO {
 		
 		con.close();
 
+	}
+
+	public void updateTranCode(PurchaseVO purchase) throws Exception{
+		
+		Connection con = DBUtil.getConnection();
+		
+		String sql="UPDATE transaction SET tran_status_code='2'"
+				+ " WHERE prod_no=?";
+		
+		PreparedStatement stmt = con.prepareStatement(sql);
+		stmt.setInt(1, purchase.getPurchaseProd().getProdNo());
+		stmt.executeUpdate();
+		
+		con.close();
 	}
 
 }

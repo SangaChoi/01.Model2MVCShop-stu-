@@ -99,11 +99,19 @@
 		<td></td>
 		<td align="left">
 		
-		수정해야돼~~~~~~~~
+		<%if(purchaseVO.getTranCode().equals("1  ")){ %>
+		현재 구매완료 상태입니다.
+		<%}else if(purchaseVO.getTranCode().equals("2  ")){  %>
+		현재 배송중 상태입니다.
+		<%} %>
+
+	
 		</td>
 		<td></td>
 		<td align="left">
-			
+		<%if(purchaseVO.getTranCode().equals("2  ")){ %>
+		<a href="/updateTranCode.do?tranNo=10215&tranCode=3">물건도착</a>
+		<%} %>	
 		</td>
 	</tr>
 	<tr>

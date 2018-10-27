@@ -38,15 +38,15 @@ public class ProductDAO {
 		Connection con = DBUtil.getConnection();
 		
 		String sql= 
-				"SELECT p.PROD_NO, p.prod_name, p.prod_detail, p.MANUFACTURE_DAY, p.PRICE, p.IMAGE_FILE, t.order_DATE, t.tran_status_code"
+				"SELECT p.PROD_NO, p.prod_name, p.prod_detail, p.MANUFACTURE_DAY, p.PRICE, p.IMAGE_FILE, p.reg_date, t.tran_status_code"
 				+" FROM product p, transaction t ";
 		if(searchVO.getSearchCondition() !=null) {
 			if(searchVO.getSearchCondition().equals("0")) {
-				sql +="WHERE PROD_NO like '%"+searchVO.getSearchKeyword()+"%' AND p.prod_no=t.prod_no(+)";
+				sql +="WHERE p.PROD_NO like '%"+searchVO.getSearchKeyword()+"%' AND p.prod_no=t.prod_no(+)";
 			}else if(searchVO.getSearchCondition().equals("1")) {
-				sql +="WHERE PROD_NAME like '%"+searchVO.getSearchKeyword()+"% AND p.prod_no=t.prod_no(+)";
+				sql +="WHERE p.PROD_NAME like '%"+searchVO.getSearchKeyword()+"%' AND p.prod_no=t.prod_no(+)";
 			}else if(searchVO.getSearchCondition().equals("2")) {
-				sql +="WHERE PRICE like '%"+searchVO.getSearchKeyword()+"% AND p.prod_no=t.prod_no(+)";
+				sql +="WHERE p.PRICE like '%"+searchVO.getSearchKeyword()+"%' AND p.prod_no=t.prod_no(+)";
 			}
 		}else {
 			sql+=" WHERE p.prod_no=t.prod_no(+)";
@@ -83,11 +83,18 @@ public class ProductDAO {
 				vo.setPrice(rs.getInt("PRICE"));
 				vo.setFileName(rs.getString("IMAGE_FILE"));
 				vo.setRegDate(rs.getDate("REG_DATE"));
-				vo.setProTranCode(rs.getString("tran_status_code"));
+				
+				if(rs.getString("tran_status_code")==null) {
+					vo.setProTranCode("0");
+				}else {
+					vo.setProTranCode(rs.getString("tran_status_code"));
+				}
 				
 				list.add(vo);
 				if (!rs.next())
 					break;
+				
+				System.out.println(vo);
 			}
 		}
 		System.out.println("list.size() : "+ list.size());

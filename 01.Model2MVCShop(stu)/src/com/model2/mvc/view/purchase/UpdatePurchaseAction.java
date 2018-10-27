@@ -16,12 +16,7 @@ public class UpdatePurchaseAction extends Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		int tranNo=Integer.parseInt(request.getParameter("tranNo"));
-/*		String buyerId=request.getParameter("buyerId");
-		
-		User user=new User();
-		UserService userService=new UserServiceImpl();
-		user=userService.getUser(buyerId);
-*/		
+	
 		PurchaseVO purchase=new PurchaseVO();
 		purchase.setPaymentOption(request.getParameter("paymentOption"));
 		purchase.setReceiverName(request.getParameter("receiverName"));

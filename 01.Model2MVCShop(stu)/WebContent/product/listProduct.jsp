@@ -3,8 +3,10 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.model2.mvc.service.product.vo.*" %>
 <%@ page import="com.model2.mvc.common.*" %>
+<%@ page import="com.model2.mvc.service.user.vo.*" %>
 
 <%
+	UserVO user=(UserVO)session.getAttribute("user");
 
 	HashMap<String,Object> map=(HashMap<String,Object>)request.getAttribute("map");
 	SearchVO searchVO=(SearchVO)request.getAttribute("searchVO");
@@ -174,9 +176,11 @@ function fncGetProductList(){
 		<td align="left">
 		<%if(menu.equals("manage")){ %>
 			<a href="/updateProductView.do?prodNo=<%=vo.getProdNo() %>&menu=<%=menu%>"><%=vo.getProdName() %></a>
-		<%}else if(menu.equals("search")){%>
+		<%}else if(menu.equals("search") && vo.getProTranCode()!="0"){ %>
+			<%=vo.getProdName() %>	
+		<%}else{%>
 			<a href="/getProduct.do?prodNo=<%=vo.getProdNo() %>&menu=<%=menu%>"><%=vo.getProdName() %></a>
-		<%} %>	
+		<%} %>
 		</td>	
 		<td></td>
 		<td align="left"><%=vo.getPrice() %></td>
@@ -184,8 +188,19 @@ function fncGetProductList(){
 		<td align="left"><%=vo.getRegDate() %></td>
 		<td></td>
 		<td align="left">
-		<%if(vo.getProTranCode().equals("1  ")){%>
+		
+		<%if(vo.getProTranCode().equals("0")){ %>
+		판매중	
+		<%}else if(menu.equals("manage") && vo.getProTranCode().equals("1  ")){%>
+		구매완료 <a href="/updateTranCodeByProd.do?prodNo=<%=vo.getProdNo() %>&tranCode=2">배송하기</a>
+		<%}else if(menu.equals("manage") && vo.getProTranCode().equals("2  ")){%>
+		배송중
+		<%}else if(menu.equals("search") && user.getRole().equals("admin") && vo.getProTranCode().equals("1  ")){ %>	
 		구매완료
+		<%}else if(menu.equals("search") && user.getRole().equals("admin") && vo.getProTranCode().equals("2  ")){ %>
+		배송중
+		<%}else{%>
+		재고없음
 		<%} %>
 		</td>	
 	</tr>
