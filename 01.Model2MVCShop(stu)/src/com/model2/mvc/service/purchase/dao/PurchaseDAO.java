@@ -176,12 +176,24 @@ public class PurchaseDAO {
 		
 		Connection con = DBUtil.getConnection();
 		
-		String sql="UPDATE transaction SET tran_status_code='2'"
-				+ " WHERE prod_no=?";
+		if(purchase.getPurchaseProd().getProTranCode().equals("2")) {
+			
+			String sql="UPDATE transaction SET tran_status_code='2'"
+					+ " WHERE prod_no=?";
 		
-		PreparedStatement stmt = con.prepareStatement(sql);
-		stmt.setInt(1, purchase.getPurchaseProd().getProdNo());
-		stmt.executeUpdate();
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, purchase.getPurchaseProd().getProdNo());
+			stmt.executeUpdate();
+					
+		}else if(purchase.getPurchaseProd().getProTranCode().equals("3")) {
+			
+			String sql="UPDATE transaction SET tran_status_code='3'"
+					+ " WHERE tran_no=?";
+			
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, purchase.getTranNo());
+			stmt.executeUpdate();
+		}
 		
 		con.close();
 	}

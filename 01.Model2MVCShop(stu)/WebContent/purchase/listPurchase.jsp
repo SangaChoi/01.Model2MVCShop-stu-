@@ -2,10 +2,12 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.model2.mvc.service.purchase.vo.*" %>
 <%@ page import="com.model2.mvc.common.*" %>
+<%@ page import="com.model2.mvc.service.user.vo.*" %>
 
 <%
 	HashMap<String,Object> map=(HashMap<String,Object>)request.getAttribute("map");
 	SearchVO searchVO=(SearchVO)request.getAttribute("searchVO");
+	UserVO user=(UserVO)session.getAttribute("user");
 
 	int total=0;
 	ArrayList<PurchaseVO> list=null;
@@ -103,6 +105,8 @@
 		현재 구매완료 상태입니다.
 		<%}else if(purchaseVO.getTranCode().equals("2  ")){  %>
 		현재 배송중 상태입니다.
+		<%}else if(purchaseVO.getTranCode().equals("3  ")){ %>
+		현재 배송완료 상태입니다.
 		<%} %>
 
 	
@@ -110,8 +114,9 @@
 		<td></td>
 		<td align="left">
 		<%if(purchaseVO.getTranCode().equals("2  ")){ %>
-		<a href="/updateTranCode.do?tranNo=10215&tranCode=3">물건도착</a>
-		<%} %>	
+		<a href="/updateTranCode.do?tranNo=<%=purchaseVO.getTranNo()%>&tranCode=3&buyerId=<%=user.getUserId()%>">물건도착</a>
+		<%}else if(purchaseVO.getTranCode().equals("3  ")){ %>
+		<%} %>
 		</td>
 	</tr>
 	<tr>

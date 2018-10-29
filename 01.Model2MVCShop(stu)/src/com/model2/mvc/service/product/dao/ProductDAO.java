@@ -108,7 +108,6 @@ public class ProductDAO {
 
 	public ProductVO findProduct(int prodNo) throws Exception{
 		
-		System.out.println("프로덕트VO findProduct() 시작");
 		
 		Connection con = DBUtil.getConnection();
 		

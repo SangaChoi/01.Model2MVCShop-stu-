@@ -195,10 +195,14 @@ function fncGetProductList(){
 		구매완료 <a href="/updateTranCodeByProd.do?prodNo=<%=vo.getProdNo() %>&tranCode=2">배송하기</a>
 		<%}else if(menu.equals("manage") && vo.getProTranCode().equals("2  ")){%>
 		배송중
+		<%}else if(menu.equals("manage") && vo.getProTranCode().equals("3  ")){%>
+		배송완료		
 		<%}else if(menu.equals("search") && user.getRole().equals("admin") && vo.getProTranCode().equals("1  ")){ %>	
 		구매완료
 		<%}else if(menu.equals("search") && user.getRole().equals("admin") && vo.getProTranCode().equals("2  ")){ %>
 		배송중
+		<%}else if(menu.equals("search") && user.getRole().equals("admin") && vo.getProTranCode().equals("3  ")){ %>
+		배송완료
 		<%}else{%>
 		재고없음
 		<%} %>

@@ -18,6 +18,7 @@ public class ListPurchaseAction extends Action{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 				
 		String buyerId=request.getParameter("buyerId");
+		System.out.println("**********buyerId : "+buyerId);
 		SearchVO searchVO=new SearchVO();
 		
 		int page=1;
