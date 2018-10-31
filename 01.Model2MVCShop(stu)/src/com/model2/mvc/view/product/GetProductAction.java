@@ -20,7 +20,6 @@ public class GetProductAction extends Action{
 		
 		Cookie[] cookies = request.getCookies();
 		if(cookies!=null && cookies.length>0) {
-			System.out.println("기존 Cookie 이용");
 		  for(int i=0;i<cookies.length;i++) {	
 			  Cookie cookie = cookies[i];
 			if(cookie.getName().equals("history")) {
@@ -28,7 +27,6 @@ public class GetProductAction extends Action{
 				cookie.setMaxAge(60*60);
 				response.addCookie(cookie);
 			}else{
-			System.out.println("Cookie 첫 생성");
 			cookie = new Cookie("history",prodNo2);
 			cookie.setMaxAge(60*60);
 			response.addCookie(cookie);
