@@ -91,10 +91,12 @@ public class ProductDAO {
 				}
 				
 				list.add(vo);
-				if (!rs.next())
-					break;
 				
 				System.out.println(vo);
+				
+				if (!rs.next())
+					break;
+			
 			}
 		}
 		System.out.println("list.size() : "+ list.size());
